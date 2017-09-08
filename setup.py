@@ -3,11 +3,7 @@
 from setuptools import setup, find_packages
 import os
 
-try:
-    import pypandoc
-    long_description = pypandoc.convert('README.md', 'rst')
-except (IOError, ImportError):
-    long_description = ''
+long_description = 'a library to storage file to cyber space'
 
 
 setup(
