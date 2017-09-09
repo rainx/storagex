@@ -23,7 +23,7 @@ def upload(filename):
 # @click.option('-k', '--key', help="Download Key")
 # @click.option('-f', '--filename', help="file name of download file")
 @click.argument("key")
-@click.argument("filename")
+@click.argument("filename", default=None, required=False)
 def download(key, filename):
     storage = Storage(1024, 768)
     storage.verbose = True

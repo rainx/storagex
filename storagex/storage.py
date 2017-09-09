@@ -67,11 +67,16 @@ class Storage(object):
             self.echo("downloading piece {} .. ".format(piece['seq']))
             one_piece_data = self.serializer.unserialize(self.backend.download_peice(piece['key']))
             content.extend(one_piece_data)
-        return content
+        return content, meta_info
 
-    def download_file(self, meta_info_key, file_name):
+    def download_file(self, meta_info_key, file_name=None):
+        content, meta_info = self.get_content(meta_info_key)
+
+        if file_name is None or file_name == "":
+            file_name = meta_info.filename
+
         with open(file_name, "wb") as f:
-            f.write(self.get_content(meta_info_key))
+            f.write(content)
             return f
         return False
 

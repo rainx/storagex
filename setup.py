@@ -8,7 +8,7 @@ long_description = 'a library to storage file to cyber space'
 
 setup(
     name='storagex',
-    version='0.1',
+    version='0.2',
     description='just storagex',
     long_description=long_description,
     author='RainX<Jing Xu>',
