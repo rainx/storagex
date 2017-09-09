@@ -27,7 +27,7 @@ Completely uploaded! YOUR DOWNLOAD KEY IS : http://f.hiphotos.baidu.com/image/pi
 donwload done! the file is /tmp/sz000001.backup
 ```
 
-### API
+## API
 
 ### Upload file
 
@@ -45,4 +45,36 @@ from storagex.storage import Storage
 
 storage = Storage()
 storage.download_file(meta_info_key, file_name)
+```
+
+## WorkFlow
+
+### Upload Workflow
+
+```
++----------------------------------------------------------+
+|                          Raw file                        |
++-----------------------------+----------------------------+
+                              | split to pieces(size is W x H x 3 - header size)
+          +------------------------------------------+
+          |                   |                      |
++---------v----+   +----------v----+          +------v-----+
+|    piece 1   |   |    piece 2    |          |   piece n  |
++---------+----+   +--------+------+          +------+-----+
+          |                 |                        |
+          |                 |  serialize(make it uploadable, such as to png format)
+          |                 |                        |
++---------v-------------+ +-v---+ +------------------v-----+    +----------------+
+|   serialized piece 1  | |  2  | |   serialized piece n   |    | meta info data |
++---------+-------------+ +--+--+ +------------------+-----+    +--^---+---------+
+          |                  |                       |             |   |
+          | upload and gen key(keys will be save to meta info+-----+   |serialize
+          |                  +                       +                 |
++---------v------------------v-----------------------v------+    +-----v---------+
+|                                                           |    |               |
+|                          backend in cyber space           <--+-+ serialized    |
+|                                                           |  | | meta info data|
++-----------------------------------------------------------+  | +---------------+
+  upload serialized meta info data into backend and gen key   <+
+  you need to keep this *key* (meta info data key)
 ```
