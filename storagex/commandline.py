@@ -27,5 +27,6 @@ def upload(filename):
 def download(key, filename):
     storage = Storage(1024, 768)
     storage.verbose = True
-    if storage.download_file(meta_info_key=key, file_name=filename) is not False:
-        click.secho("donwload done! the file is {}".format(filename), fg='green')
+    filename_out = storage.download_file(meta_info_key=key, file_name=filename)
+    if filename_out is not False:
+        click.secho("donwload done! the file is {}".format(filename_out), fg='green')

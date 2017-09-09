@@ -1,3 +1,6 @@
+version 0.3 2017-09-09 
+-----
+- return file_name instead return file object on download()
 
 version 0.2 2017-09-09 
 -----

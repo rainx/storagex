@@ -77,7 +77,7 @@ class Storage(object):
 
         with open(file_name, "wb") as f:
             f.write(content)
-            return f
+            return file_name
         return False
 
     def echo(self, *args):
